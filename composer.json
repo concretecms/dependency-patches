@@ -1,0 +1,38 @@
+{
+    "type":"library",
+    "license":"MIT",
+    "name":"mlocati/concrete5-php73-patches",
+    "description":"Patches required for concrete5 version8 to run on PHP 7.3",
+    "homepage":"https://github.com/concrete5/php73-patches",
+    "keywords":[
+        "concrete5",
+        "composer",
+        "php",
+        "7.3",
+        "patch"
+    ],
+    "authors":[
+        {
+            "name":"Michele Locati",
+            "email":"michele@locati.it",
+            "role":"author",
+            "homepage":"https://mlocati.github.io"
+        }
+    ],
+    "require":{
+        "mlocati/composer-patcher": "^1.0.0"
+    },
+    "extra":{
+        "patches": {
+            "doctrine/orm:^2.5": {
+                "Fix UnitOfWork::createEntity()": "doctrine/orm/UnitOfWork-createEntity-continue.patch"
+            },
+            "zendframework/zend-stdlib:^2": {
+                "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
+            },
+            "sunra/php-simple-html-dom-parser:^1.5": {
+                "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch"
+            }
+        }
+    }
+}
