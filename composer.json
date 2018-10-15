@@ -24,13 +24,13 @@
     },
     "extra":{
         "patches": {
-            "doctrine/orm:^2.5": {
+            "doctrine/orm:2.5.14": {
                 "Fix UnitOfWork::createEntity()": "doctrine/orm/UnitOfWork-createEntity-continue.patch"
             },
-            "zendframework/zend-stdlib:^2": {
+            "zendframework/zend-stdlib:2.7.7": {
                 "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
             },
-            "sunra/php-simple-html-dom-parser:^1.5": {
+            "sunra/php-simple-html-dom-parser:1.5.2": {
                 "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch"
             }
         }
