@@ -1,16 +1,9 @@
 {
     "type":"library",
     "license":"MIT",
-    "name":"mlocati/concrete5-php73-patches",
-    "description":"Patches required for concrete5 version8 to run on PHP 7.3",
-    "homepage":"https://github.com/concrete5/php73-patches",
-    "keywords":[
-        "concrete5",
-        "composer",
-        "php",
-        "7.3",
-        "patch"
-    ],
+    "name":"concrete5/dependency-patches",
+    "description":"Patches required for concrete5 dependencies",
+    "homepage":"https://github.com/concrete5/dependency-patches",
     "authors":[
         {
             "name":"Michele Locati",
