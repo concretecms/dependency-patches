@@ -28,6 +28,9 @@
             },
             "phpunit/phpunit:4.8.36": {
                 "Avoid each() in Getopt": "phpunit/phpunit/Getopt-each.patch"
+            },
+            "tedivm/jshrink:1.1.0": {
+                "Fix continue switch in FileGenerator and MethodReflection": "tedivm/jshrink/fix-minifier-loop.patch"
             }
         }
     }
