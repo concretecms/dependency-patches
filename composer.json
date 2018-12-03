@@ -31,6 +31,9 @@
             },
             "tedivm/jshrink:1.1.0": {
                 "Fix continue switch in FileGenerator and MethodReflection": "tedivm/jshrink/fix-minifier-loop.patch"
+            },
+            "zendframework/zend-code:2.6.3": {
+                "Fix continue switch in FileGenerator and MethodReflection": "zendframework/zend-code/switch-continue.patch"
             }
         }
     }
