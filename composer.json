@@ -34,6 +34,9 @@
             },
             "zendframework/zend-code:2.6.3": {
                 "Fix continue switch in FileGenerator and MethodReflection": "zendframework/zend-code/switch-continue.patch"
+            },
+            "zendframework/zend-http:2.6.0": {
+                "Remove support for the X-Original-Url and X-Rewrite-Url headers": "zendframework/zend-http/no-x-original-url-x-rewrite.patch"
             }
         }
     }
