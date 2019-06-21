@@ -1,41 +1,24 @@
-From 3487d61cd1611adff03bf0507a673f6f6828d529 Mon Sep 17 00:00:00 2001
 From: Craig Duncan <git@duncanc.co.uk>
 Date: Tue, 28 Mar 2017 22:39:01 +0100
-Subject: [PATCH 01/11] Don't protect newlines before opening braces
+Subject: [PATCH] Don't protect newlines before opening braces
 
----
- src/JShrink/Minifier.php | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 86734da..a36ecde 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -181,7 +181,7 @@ class Minifier
                  // new lines
                  case "\n":
                      // if the next line is something that can't stand alone preserve the newline
--                    if (strpos('(-+{[@', $this->b) !== false) {
-+                    if (strpos('(-+[@', $this->b) !== false) {
+-                    if ($this->b !== false && strpos('(-+{[@', $this->b) !== false) {
++                    if ($this->b !== false && strpos('(-+[@', $this->b) !== false) {
                          echo $this->a;
                          $this->saveString();
                          break;
--- 
-2.17.1
 
 
-From 7368a6933975add216233cb8fba1df3754331277 Mon Sep 17 00:00:00 2001
 From: Craig Duncan <git@duncanc.co.uk>
 Date: Tue, 28 Mar 2017 22:24:40 +0100
-Subject: [PATCH 02/11] Ensure that comments following other comments are
- handled
+Subject: [PATCH] Ensure that comments following other comments are handled
 
----
- src/JShrink/Minifier.php | 34 ++++++++++++++++------------------
- 1 file changed, 16 insertions(+), 18 deletions(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 86734da..a0e19d0 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -312,10 +312,14 @@ class Minifier
@@ -119,21 +102,12 @@ index 86734da..a0e19d0 100644
      }
  
      /**
--- 
-2.17.1
 
 
-From 41b3d66f253821faf3ac8d52d8270c675f208ceb Mon Sep 17 00:00:00 2001
 From: Robert Hafner <tedivm@tedivm.com>
 Date: Thu, 7 Dec 2017 16:03:40 -0800
-Subject: [PATCH 03/11] Add support for template literals
+Subject: [PATCH] Add support for template literals
 
----
- src/JShrink/Minifier.php | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 85e8de9..fc3fee7 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -74,6 +74,11 @@ class Minifier
@@ -170,21 +144,12 @@ index 85e8de9..fc3fee7 100644
                      break;
  
                  // Escaped characters get picked up here. If it's an escaped new line it's not really needed
--- 
-2.17.1
 
 
-From 60daeea486b1bb11c6ad1d693f55263e5c69e97a Mon Sep 17 00:00:00 2001
 From: Robert Hafner <tedivm@tedivm.com>
 Date: Thu, 7 Dec 2017 16:48:36 -0800
-Subject: [PATCH 04/11] upgrade dependencies, php requirements, formatting
+Subject: [PATCH] upgrade dependencies, php requirements, formatting
 
----
- src/JShrink/Minifier.php | 44 +++++++++++++++++++++-------------------
- 1 file changed, 23 insertions(+), 21 deletions(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index fc3fee7..76f4ced 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -120,9 +120,7 @@ class Minifier
@@ -358,21 +323,12 @@ index fc3fee7..76f4ced 100644
      }
 -
  }
--- 
-2.17.1
 
 
-From 81fdfe880ff51817922170fb65f972214fb38984 Mon Sep 17 00:00:00 2001
 From: Alex <aprogs@2281272.no-reply.drupal.org>
 Date: Sat, 30 Jun 2018 12:50:18 +0300
-Subject: [PATCH 05/11] Fixed infinite loop when reading invalid JavaScript.
+Subject: [PATCH] Fixed infinite loop when reading invalid JavaScript.
 
----
- src/JShrink/Minifier.php | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 76f4ced..32a4abf 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -459,11 +459,8 @@ class Minifier
@@ -389,22 +345,12 @@ index 76f4ced..32a4abf 100644
              switch ($this->a) {
  
                  // If the string opener (single or double quote) is used
--- 
-2.17.1
 
 
-From 95bf99fe474735efce4321e98326810b366bc31c Mon Sep 17 00:00:00 2001
 From: Alex <aprogs@2281272.no-reply.drupal.org>
 Date: Sat, 30 Jun 2018 12:59:50 +0300
-Subject: [PATCH 06/11] Updated loop condition to strictly validate function
- result.
+Subject: [PATCH] Updated loop condition to strictly validate function result.
 
----
- src/JShrink/Minifier.php | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 32a4abf..3343131 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -460,7 +460,7 @@ class Minifier
@@ -416,21 +362,12 @@ index 32a4abf..3343131 100644
              switch ($this->a) {
  
                  // If the string opener (single or double quote) is used
--- 
-2.17.1
 
 
-From 254e354e6fa22f3728d9a80276aa9df0f44e61b7 Mon Sep 17 00:00:00 2001
 From: Alex <aprogs@2281272.no-reply.drupal.org>
 Date: Mon, 2 Jul 2018 17:38:39 +0300
-Subject: [PATCH 07/11] Fixed code formatting notices.
+Subject: [PATCH] Fixed code formatting notices.
 
----
- src/JShrink/Minifier.php | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 3343131..8103452 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -274,9 +274,8 @@ class Minifier
@@ -453,58 +390,12 @@ index 3343131..8103452 100644
              switch ($this->a) {
  
                  // If the string opener (single or double quote) is used
--- 
-2.17.1
 
 
-From 91105810dafedba0390608d7465abd602beb6410 Mon Sep 17 00:00:00 2001
-From: Sergei Morozov <morozov@tut.by>
-Date: Fri, 14 Sep 2018 19:55:03 -0700
-Subject: [PATCH 08/11] Fixed test failures on PHP 7.3
-
-1. continue in break shoud target the while loop directly (php/php-src@04e3523).
-2. strpos() doesn't longer accept non-string needles (https://wiki.php.net/rfc/deprecations_php_7_3#string_search_functions_with_integer_needle).
----
- src/JShrink/Minifier.php | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 8103452..ad8157f 100644
---- a/src/JShrink/Minifier.php
-+++ b/src/JShrink/Minifier.php
-@@ -183,7 +183,7 @@ class Minifier
-                 // new lines
-                 case "\n":
-                     // if the next line is something that can't stand alone preserve the newline
--                    if (strpos('(-+[@', $this->b) !== false) {
-+                    if ($this->b !== false && strpos('(-+[@', $this->b) !== false) {
-                         echo $this->a;
-                         $this->saveString();
-                         break;
-@@ -231,7 +231,7 @@ class Minifier
-                             // check for some regex that breaks stuff
-                             if ($this->a === '/' && ($this->b === '\'' || $this->b === '"')) {
-                                 $this->saveRegex();
--                                continue;
-+                                continue 3;
-                             }
- 
-                             echo $this->a;
--- 
-2.17.1
-
-
-From 8b87ae3515c6cacb5aba8024cd7571dfeb4fbee4 Mon Sep 17 00:00:00 2001
 From: Antti Hukkanen <antti.hukkanen@mainiotech.fi>
 Date: Fri, 7 Jun 2019 00:24:25 +0300
-Subject: [PATCH 09/11] Detect regular expression after arithmetic operation
+Subject: [PATCH] Detect regular expression after arithmetic operation
 
----
- src/JShrink/Minifier.php | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index ad8157f..6c3bbc1 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -243,7 +243,7 @@ class Minifier
@@ -516,22 +407,12 @@ index ad8157f..6c3bbc1 100644
                  $this->saveRegex();
              }
          }
--- 
-2.17.1
 
 
-From 5b057e28c742a60fa739269c592635433137b492 Mon Sep 17 00:00:00 2001
 From: Antti Hukkanen <antti.hukkanen@mainiotech.fi>
 Date: Fri, 7 Jun 2019 00:37:27 +0300
-Subject: [PATCH 10/11] Remove reduntant slash from the regular expression
- character match
+Subject: [PATCH] Remove reduntant slash from the regular expression character match
 
----
- src/JShrink/Minifier.php | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index 6c3bbc1..e6fcfdf 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -243,7 +243,7 @@ class Minifier
@@ -543,22 +424,12 @@ index 6c3bbc1..e6fcfdf 100644
                  $this->saveRegex();
              }
          }
--- 
-2.17.1
 
 
-From 923924ebfe9f63bc645269390d04cfcf68b8a180 Mon Sep 17 00:00:00 2001
 From: Antti Hukkanen <antti.hukkanen@mainiotech.fi>
 Date: Fri, 7 Jun 2019 00:39:02 +0300
-Subject: [PATCH 11/11] Remove duplicate ampresand from the regular expression
- char match
+Subject: [PATCH] Remove duplicate ampresand from the regular expression char match
 
----
- src/JShrink/Minifier.php | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/JShrink/Minifier.php b/src/JShrink/Minifier.php
-index e6fcfdf..171a7b6 100644
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
 @@ -243,7 +243,7 @@ class Minifier
@@ -570,6 +441,4 @@ index e6fcfdf..171a7b6 100644
                  $this->saveRegex();
              }
          }
--- 
-2.17.1
 
