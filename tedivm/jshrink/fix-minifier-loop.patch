@@ -1,6 +1,6 @@
 From: Michele Locati <michele@locati.it>
 Date: Thu, 29 Nov 2018 16:44:12 +0100
-Subject: [PATCH] Fix continue switch in FileGenerator and MethodReflection
+Subject: [PATCH] Fix continue switch in Minifier
 
 --- a/src/JShrink/Minifier.php
 +++ b/src/JShrink/Minifier.php
