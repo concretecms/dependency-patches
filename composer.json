@@ -17,6 +17,9 @@
     },
     "extra":{
         "patches": {
+            "doctrine/annotations:1.2.7": {
+                "Fix access array offset on value of type null": "doctrine/annotations/access-array-offset-on-null.patch"
+            },
             "doctrine/orm:2.5.14": {
                 "Fix UnitOfWork::createEntity()": "doctrine/orm/UnitOfWork-createEntity-continue.patch"
             },
