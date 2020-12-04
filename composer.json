@@ -21,7 +21,8 @@
         "Fix access array offset on value of type null": "doctrine/annotations/access-array-offset-on-null.patch"
       },
       "doctrine/orm:2.5.14": {
-        "Fix UnitOfWork::createEntity()": "doctrine/orm/UnitOfWork-createEntity-continue.patch"
+        "Fix UnitOfWork::createEntity()": "doctrine/orm/UnitOfWork-createEntity-continue.patch",
+        "Fix access array offset on value of type null": "doctrine/orm/access-array-offset-on-null.patch"
       },
       "zendframework/zend-stdlib:2.7.7": {
         "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
