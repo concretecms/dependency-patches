@@ -54,6 +54,9 @@
       },
       "lcobucci/jwt:3.4.5": {
         "Adds php 8 compability to jwt version 3.4.5": "lcobucci/jwt/php8-compatibility.patch"
+      },
+      "lcobucci/jwt:3.4.6": {
+        "Adds php 8 compability to jwt version 3.4.6": "lcobucci/jwt/php8-compatibility.patch"
       }
     }
   }
