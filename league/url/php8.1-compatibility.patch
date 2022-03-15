@@ -1,0 +1,81 @@
+From: Michele Locati <michele@locati.it>
+Date: Tue, 15 Mar 2022 12:11:04 +0100
+Subject: [PATCH] Fix PHP 8.1 compatibility
+
+
+--- a/src/Components/AbstractArray.php
++++ b/src/Components/AbstractArray.php
+@@ -60,6 +60,7 @@ abstract class AbstractArray implements IteratorAggregate, Countable
+      *
+      * @return ArrayIterator
+      */
++    #[\ReturnTypeWillChange]
+     public function getIterator()
+     {
+         return new ArrayIterator($this->data);
+@@ -72,6 +73,7 @@ abstract class AbstractArray implements IteratorAggregate, Countable
+      *
+      * @return integer
+      */
++    #[\ReturnTypeWillChange]
+     public function count($mode = COUNT_NORMAL)
+     {
+         return count($this->data, $mode);
+@@ -84,6 +86,7 @@ abstract class AbstractArray implements IteratorAggregate, Countable
+      *
+      * @return bool
+      */
++    #[\ReturnTypeWillChange]
+     public function offsetExists($offset)
+     {
+         return isset($this->data[$offset]);
+@@ -94,6 +97,7 @@ abstract class AbstractArray implements IteratorAggregate, Countable
+      *
+      * @param int|string $offset
+      */
++    #[\ReturnTypeWillChange]
+     public function offsetUnset($offset)
+     {
+         unset($this->data[$offset]);
+@@ -106,6 +110,7 @@ abstract class AbstractArray implements IteratorAggregate, Countable
+      *
+      * @return null
+      */
++    #[\ReturnTypeWillChange]
+     public function offsetGet($offset)
+     {
+         if (isset($this->data[$offset])) {
+
+--- a/src/Components/AbstractComponent.php
++++ b/src/Components/AbstractComponent.php
+@@ -64,7 +64,7 @@ abstract class AbstractComponent implements ComponentInterface
+      */
+     public function __toString()
+     {
+-        return str_replace(null, '', $this->get());
++        return (string) $this->get();
+     }
+ 
+     /**
+
+--- a/src/Components/AbstractSegment.php
++++ b/src/Components/AbstractSegment.php
+@@ -115,6 +115,7 @@ abstract class AbstractSegment extends AbstractArray implements ArrayAccess
+      * @param int|string $offset
+      * @param mixed      $value
+      */
++    #[\ReturnTypeWillChange]
+     public function offsetSet($offset, $value)
+     {
+         $data = $this->data;
+
+--- a/src/Components/Query.php
++++ b/src/Components/Query.php
+@@ -133,6 +133,7 @@ class Query extends AbstractArray implements QueryInterface, ArrayAccess
+     /**
+      * {@inheritdoc}
+      */
++    #[\ReturnTypeWillChange]
+     public function offsetSet($offset, $value)
+     {
+         if (is_null($offset)) {
