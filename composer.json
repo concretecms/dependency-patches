@@ -31,7 +31,8 @@
         "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
       },
       "sunra/php-simple-html-dom-parser:1.5.2": {
-        "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch"
+        "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch",
+        "Add PHP 8.1 compability to league/url version 3.3.5": "sunra/php-simple-html-dom-parser/php8.1-compatibility.patch"
       },
       "phpunit/phpunit:4.8.36": {
         "Avoid each() in Getopt": "phpunit/phpunit/Getopt-each.patch"
