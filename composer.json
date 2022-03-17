@@ -61,6 +61,9 @@
       },
       "league/url:3.3.5": {
         "Add PHP 8.1 compability to league/url version 3.3.5": "league/url/php8.1-compatibility.patch"
+      },
+      "laminas/laminas-code:3.4.1": {
+        "Add PHP 8.1 compability to league/url version 3.3.5": "laminas/laminas-code/php8.1-compatibility.patch"
       }
     }
   }
