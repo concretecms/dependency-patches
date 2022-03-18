@@ -23,7 +23,7 @@ Backport of https://github.com/doctrine/orm/pull/7785
      {
          if ($token === null) {
 -            $token = $this->lexer->lookahead;
-+            $token = $this->lexer->lookahead ?? ['position' => null];
++            $token = isset($this->lexer->lookahead) ? $this->lexer->lookahead : ['position' => null];
          }
  
          // Minimum exposed chars ahead of token
@@ -50,7 +50,7 @@ Backport of https://github.com/doctrine/orm/pull/7785
          $this->lexer->moveNext();
  
 -        switch ($this->lexer->lookahead['type']) {
-+        switch ($this->lexer->lookahead['type'] ?? null) {
++        switch (isset($this->lexer->lookahead['type']) ? $this->lexer->lookahead['type'] : null) {
              case Lexer::T_SELECT:
                  $statement = $this->SelectStatement();
                  break;
@@ -125,7 +125,7 @@ Backport of https://github.com/doctrine/orm/pull/7785
          } else {
              $array['type'] = 'entity';
          }
-+        $metadataTable = $metadata->table ?? ['name' => null];
++        $metadataTable = isset($metadata->table) ? $metadata->table : ['name' => null];
  
 -        $array['table'] = $metadata->table['name'];
 +        $array['table'] = $metadataTable['name'];
