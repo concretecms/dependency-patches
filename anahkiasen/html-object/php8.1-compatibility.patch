@@ -1,0 +1,28 @@
+From: Michele Locati <michele@locati.it>
+Date: Thu, 17 Mar 2022 09:05:19 +0100
+Subject: [PATCH] Fix PHP 8.1 compatibility
+
+
+--- a/src/Traits/Tag.php
++++ b/src/Traits/Tag.php
+@@ -547,7 +547,7 @@ public function addClass($class)
+ 
+         if ($class !== null && $class !== '') {
+             // Prevent adding a class twice
+-            $classes = explode(' ', $this->attributes['class']);
++            $classes = explode(' ', (string) $this->attributes['class']);
+             if (!in_array($class, $classes, true)) {
+                 $this->attributes['class'] = trim($this->attributes['class'] . ' ' . $class);
+             }
+
+--- a/src/Traits/TreeObject.php
++++ b/src/Traits/TreeObject.php
+@@ -113,7 +113,7 @@ public function getChild($name)
+         }
+ 
+         // Dot notation
+-        $children = explode('.', $name);
++        $children = explode('.', (string) $name);
+         if (count($children) === 1) {
+             return Helpers::arrayGet($this->getChildren(), $children[0]);
+         }
