@@ -30,7 +30,17 @@ If you use a composer-based concrete5 installation you need to add these lines t
 
 If you want to patch a composer package named `<vendor>/<package>` at version `1.2.3`, you should:
 
-1. create a `.patch` file in the `<vendor>/<package>` directory
+1. create the `.patch` file:
+    1. in the Concrete root directory, run `composer reinstall <vendor>/<package> --prefer-source` (requires composer 2.1+) to have a git repository
+    2. run `git checkout -b my-patch <tag>` inside the package directory (where `<tag>` is the tag corresponsing to the installed package version)
+    3. edit the required files
+    4. create a commit with the changes, by running `git commit -am "My wonderful patch"`
+    5. create a patch file by running `git format-patch --no-stat -1`
+    6. edit that patch by removing useless lines, like:
+        - the initial `From <sha1> <date>`
+        - the git-specific lines (they start with `diff --git ...` and `index sha1..sha1`
+        - the closing comments, if any (the `--` line at the end of the file and any other lines after it)
+    7. move the .patch file to the `<vendor>/<package>` directory in the dependency-patches repository
 2. add a `<vendor>/<package>:1.2.3` key to the `extra`.`patches` section of the `composer.json` file of this project.
    For example:
    ```json
