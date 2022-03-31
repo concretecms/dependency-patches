@@ -64,6 +64,9 @@
       },
       "laminas/laminas-code:3.4.1": {
         "Add PHP 8.1 compatibility": "laminas/laminas-code/php8.1-compatibility.patch"
+      },
+      "anahkiasen/html-object:1.4.4": {
+        "Add PHP 8.1 compatibility": "anahkiasen/html-object/php8.1-compatibility.patch"
       }
     }
   }
