@@ -1,7 +1,7 @@
 {
   "type": "library",
   "license": "MIT",
-  "name": "concrete5/dependency-patches",
+  "name": "concretecms/dependency-patches",
   "description": "Patches required for concrete5 dependencies",
   "homepage": "https://github.com/concrete5/dependency-patches",
   "authors": [
