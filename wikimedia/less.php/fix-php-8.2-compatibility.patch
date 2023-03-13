@@ -1,19 +1,31 @@
-From 85185217f38b8b0b76cef347b442e182fcaddf24 Mon Sep 17 00:00:00 2001
+From 5b88afcac2a8c75b4df379a18acb8c806700e524 Mon Sep 17 00:00:00 2001
 From: Michele Locati <michele@locati.it>
 Date: Mon, 13 Mar 2023 21:04:54 +0100
 Subject: [PATCH] Fix PHP 8.2 compatibility
 
 
-diff --git a/lib/Less/Tree/Variable.php b/lib/Less/Tree/Variable.php
-index cc0182c..e671350 100644
---- a/lib/Less/Tree/Variable.php
-+++ b/lib/Less/Tree/Variable.php
-@@ -13,6 +13,7 @@ class Less_Tree_Variable extends Less_Tree{
- 	public $currentFileInfo;
- 	public $evaluating = false;
- 	public $type = 'Variable';
-+	public $parensInOp;
+diff --git a/lib/Less/Tree.php b/lib/Less/Tree.php
+index 6fb104b..edffcc3 100644
+--- a/lib/Less/Tree.php
++++ b/lib/Less/Tree.php
+@@ -9,6 +9,8 @@
+ class Less_Tree{
  
-     /**
-      * @param string $name
-
+ 	public $cache_string;
++	public $parensInOp;
++	public $allExtends;
+ 
+ 	public function toCSS(){
+ 		$output = new Less_Output();
+diff --git a/lib/Less/Tree/Ruleset.php b/lib/Less/Tree/Ruleset.php
+index bdf9fec..bb9cf0e 100644
+--- a/lib/Less/Tree/Ruleset.php
++++ b/lib/Less/Tree/Ruleset.php
+@@ -28,6 +28,7 @@ class Less_Tree_Ruleset extends Less_Tree{
+ 	public $originalRuleset;
+ 
+ 	public $first_oelements;
++	public $extendOnEveryPath;
+ 
+ 	public function SetRulesetIndex(){
+ 		$this->ruleset_id = Less_Parser::$next_id++;
