@@ -1,27 +1,26 @@
-# Dependency patches for concrete5
+# Dependency patches for concrete5 and Concrete CMS
 
-concrete5 version 8 still supports PHP version 5.5.
-This is required because many users are still using that PHP version, and they may not be able (or may not know how) to upgrade to a newer PHP version.
+concrete5 v8 and Concrete CMS v9+ use a lot of third party libraries, installed via Composer.
 
-Internal changes in newer PHP versions require to upgrade some of the composer packages used by concrete5, but those packages are no more compatible with PHP 5.5, so we need a way to patch them.
+Internal changes in newer PHP versions require to upgrade some of those composer packages, but some of them are no more compatible with the PHP versions we support, or they haven't been fixed yet.
 
-This `dependency-patches` project contains those required patches, so that concrete5 can be used with PHP ranging from 5.5 to the newer versions.
+This `dependency-patches` project contains those required patches, so that concrete5 and Concrete CMS can still use them.
 
 
 ## How to use
 
-The official releases of concrete5 that can be downloaded from https://www.concrete5.org/download already contain the patches included in `dependency-patches`.
+The official releases of concrete5 and Concrete CMS that can be downloaded from https://www.concretecms.org/download already contain the patches included in `dependency-patches`.
 
-If you use a composer-based concrete5 installation you need to add these lines to your `composer.json` file:
+If you use a composer-based concrete5/Concrete CMS installation you need to add these lines to your `composer.json` file:
 
-- in the `require` section:
+- in the `require` section (it it's not already included in the `composer.json` file that comes with concrete5/Concrete CMS):
   ```json
-  "concrete5/dependency-patches": "^1.0.0",
+  "concretecms/dependency-patches": "^1",
   ```
 - in the `extra` section:
   ```json
   "allow-subpatches": [
-      "concrete5/dependency-patches"
+      "concretecms/dependency-patches"
   ],
   ```
 
@@ -48,10 +47,10 @@ If you want to patch a composer package named `<vendor>/<package>` at version `1
        "Description of the patch": "<vendor>/<package>/name-of-the-patch-file.patch"
    },
    ```
-3. to test the patch locally, you can edit the `composer.json` file of your concrete5 installation, adding:
+3. to test the patch locally, you can edit the `composer.json` file of your concrete5/Concrete CMS installation, adding:
    - In the `require` section:
      ```json
-     "concrete5/dependency-patches": "dev-master"
+     "concretecms/dependency-patches": "dev-master"
      ```
    - In the `repositories` section:
      ```json
