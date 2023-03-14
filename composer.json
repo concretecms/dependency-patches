@@ -2,8 +2,8 @@
   "type": "library",
   "license": "MIT",
   "name": "concretecms/dependency-patches",
-  "description": "Patches required for concrete5 dependencies",
-  "homepage": "https://github.com/concrete5/dependency-patches",
+  "description": "Patches required for concrete5 and Concrete CMS dependencies",
+  "homepage": "https://github.com/concretecms/dependency-patches",
   "authors": [
     {
       "name": "Michele Locati",
