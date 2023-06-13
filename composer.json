@@ -30,6 +30,9 @@
       "egulias/email-validator:1.2.15": {
         "Fix access array offset on value of type null": "egulias/email-validator/access-array-offset-on-null.patch"
       },
+      "gettext/gettext:3.5.9": {
+        "Fix PHP 8 compatibility": "gettext/gettext/php8-compatibility.patch"
+      },
       "laminas/laminas-code:3.4.1": {
         "Add PHP 8.1 compatibility": "laminas/laminas-code/php8.1-compatibility.patch"
       },
@@ -44,6 +47,9 @@
       },
       "phpunit/phpunit:4.8.36": {
         "Avoid each() in Getopt": "phpunit/phpunit/Getopt-each.patch"
+      },
+      "primal/color:1.0.1": {
+        "Fix PHP 8 compatibility": "primal/color/php8-compatibility.patch"
       },
       "sunra/php-simple-html-dom-parser:1.5.2": {
         "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch",
