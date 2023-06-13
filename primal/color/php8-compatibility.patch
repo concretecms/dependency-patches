@@ -1,0 +1,15 @@
+From: Michele Locati <michele@locati.it>
+Date: Tue, 13 Jun 2023 12:30:34 +0200
+Subject: [PATCH] Fix PHP 8.2 deprecation warning
+
+
+--- a/lib/Primal/Color/Parser.php
++++ b/lib/Primal/Color/Parser.php
+@@ -6,6 +6,7 @@ class Parser {
+ 	
+ 	protected $chunks;
+ 	protected $result;
++	protected $type;
+ 
+ 
+ 	function __construct($input) {

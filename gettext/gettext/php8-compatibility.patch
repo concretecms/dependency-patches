@@ -1,0 +1,15 @@
+From: Michele Locati <michele@locati.it>
+Date: Tue, 13 Jun 2023 14:11:32 +0200
+Subject: [PATCH] Fix PHP 8.2 deprecation warning
+
+
+--- a/src/Translations.php
++++ b/src/Translations.php
+@@ -113,6 +113,7 @@ class Translations extends \ArrayObject
+      *
+      * @return Translation
+      */
++    #[\ReturnTypeWillChange]
+     public function offsetSet($index, $value)
+     {
+         if (!($value instanceof Translation)) {
