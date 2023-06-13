@@ -17,6 +17,9 @@
   },
   "extra": {
     "patches": {
+      "anahkiasen/html-object:1.4.4": {
+        "Add PHP 8.1 compatibility": "anahkiasen/html-object/php8.1-compatibility.patch"
+      },
       "doctrine/annotations:1.2.7": {
         "Fix access array offset on value of type null": "doctrine/annotations/access-array-offset-on-null.patch"
       },
@@ -27,31 +30,8 @@
       "egulias/email-validator:1.2.15": {
         "Fix access array offset on value of type null": "egulias/email-validator/access-array-offset-on-null.patch"
       },
-      "zendframework/zend-stdlib:2.7.7": {
-        "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
-      },
-      "sunra/php-simple-html-dom-parser:1.5.2": {
-        "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch",
-        "Add PHP 8.1 compatibility": "sunra/php-simple-html-dom-parser/php8.1-compatibility.patch"
-      },
-      "phpunit/phpunit:4.8.36": {
-        "Avoid each() in Getopt": "phpunit/phpunit/Getopt-each.patch"
-      },
-      "tedivm/jshrink:1.1.0": {
-        "Fix continue switch in Minifier": "tedivm/jshrink/fix-minifier-loop.patch",
-        "Update to upstream version 1.3.2": "tedivm/jshrink/update-upstream-1.3.2.patch"
-      },
-      "zendframework/zend-code:2.6.3": {
-        "Fix continue switch in FileGenerator and MethodReflection": "zendframework/zend-code/switch-continue.patch"
-      },
-      "zendframework/zend-http:2.6.0": {
-        "Remove support for the X-Original-Url and X-Rewrite-Url headers": "zendframework/zend-http/no-x-original-url-x-rewrite.patch"
-      },
-      "zendframework/zend-mail:2.7.3": {
-        "Fix idn_to_ascii deprecation warning": "zendframework/zend-mail/fix-idn_to_ascii-deprecation-warning.patch"
-      },
-      "zendframework/zend-validator:2.8.2": {
-        "Fix idn_to_ascii/idn_to_utf8 deprecation warning": "zendframework/zend-validator/fix-idn_to_-deprecation-warning.patch"
+      "laminas/laminas-code:3.4.1": {
+        "Add PHP 8.1 compatibility": "laminas/laminas-code/php8.1-compatibility.patch"
       },
       "lcobucci/jwt:3.4.5": {
         "Add PHP 8 compatibility": "lcobucci/jwt/php8-compatibility.patch"
@@ -62,14 +42,34 @@
       "league/url:3.3.5": {
         "Add PHP 8.1 compatibility": "league/url/php8.1-compatibility.patch"
       },
-      "laminas/laminas-code:3.4.1": {
-        "Add PHP 8.1 compatibility": "laminas/laminas-code/php8.1-compatibility.patch"
+      "phpunit/phpunit:4.8.36": {
+        "Avoid each() in Getopt": "phpunit/phpunit/Getopt-each.patch"
       },
-      "anahkiasen/html-object:1.4.4": {
-        "Add PHP 8.1 compatibility": "anahkiasen/html-object/php8.1-compatibility.patch"
+      "sunra/php-simple-html-dom-parser:1.5.2": {
+        "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch",
+        "Add PHP 8.1 compatibility": "sunra/php-simple-html-dom-parser/php8.1-compatibility.patch"
+      },
+      "tedivm/jshrink:1.1.0": {
+        "Fix continue switch in Minifier": "tedivm/jshrink/fix-minifier-loop.patch",
+        "Update to upstream version 1.3.2": "tedivm/jshrink/update-upstream-1.3.2.patch"
       },
       "wikimedia/less.php:1.8.2": {
           "Add PHP 8.2 compatibility": "wikimedia/less.php/fix-php-8.2-compatibility.patch"
+      },
+      "zendframework/zend-code:2.6.3": {
+        "Fix continue switch in FileGenerator and MethodReflection": "zendframework/zend-code/switch-continue.patch"
+      },
+      "zendframework/zend-http:2.6.0": {
+        "Remove support for the X-Original-Url and X-Rewrite-Url headers": "zendframework/zend-http/no-x-original-url-x-rewrite.patch"
+      },
+      "zendframework/zend-mail:2.7.3": {
+        "Fix idn_to_ascii deprecation warning": "zendframework/zend-mail/fix-idn_to_ascii-deprecation-warning.patch"
+      },
+      "zendframework/zend-stdlib:2.7.7": {
+        "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
+      },
+      "zendframework/zend-validator:2.8.2": {
+        "Fix idn_to_ascii/idn_to_utf8 deprecation warning": "zendframework/zend-validator/fix-idn_to_-deprecation-warning.patch"
       }
     }
   }
