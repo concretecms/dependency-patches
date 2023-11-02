@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags-ignore:
+      - "**"
+  pull_request:
+    branches:
+      - main
+      - master
+  repository_dispatch:
+    types:
+      - tests
+jobs:
+  ci:
+    name: CI
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        php-version:
+          - "8.2"
+    runs-on: ${{ matrix.os }}
+    steps:
+      -
+        name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer
+          coverage: none
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Test
+        run: php ./.github/workflows/tests.php
