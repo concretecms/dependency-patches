@@ -1,3 +1,4 @@
+[![Tests](https://github.com/mlocati/concretecms-dependency-patches/actions/workflows/tests.yml/badge.svg)](https://github.com/mlocati/concretecms-dependency-patches/actions/workflows/tests.yml)
 # Dependency patches for concrete5 and Concrete CMS
 
 concrete5 v8 and Concrete CMS v9+ use a lot of third party libraries, installed via Composer.
