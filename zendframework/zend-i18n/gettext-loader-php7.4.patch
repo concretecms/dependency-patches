@@ -1,0 +1,15 @@
+From: Michele Locati <michele@locati.it>
+Date: Thu, 2 Nov 2023 12:31:03 +0100
+Subject: [PATCH] Let Gettext loader support PHP 7.4
+
+--- a/src/Translator/Loader/Gettext.php
++++ b/src/Translator/Loader/Gettext.php
+@@ -139,7 +139,7 @@ class Gettext extends AbstractFileLoader
+         }
+ 
+         // Read header entries
+-        if (array_key_exists('', $textDomain)) {
++        if ($textDomain->offsetExists('')) {
+             $rawHeaders = explode("\n", trim($textDomain['']));
+ 
+             foreach ($rawHeaders as $rawHeader) {

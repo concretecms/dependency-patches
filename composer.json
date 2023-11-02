@@ -68,6 +68,9 @@
       "zendframework/zend-http:2.6.0": {
         "Remove support for the X-Original-Url and X-Rewrite-Url headers": "zendframework/zend-http/no-x-original-url-x-rewrite.patch"
       },
+      "zendframework/zend-i18n:2.7.3": {
+        "Add support for PHP 7.4 to Gettext Loader": "zendframework/zend-i18n/gettext-loader-php7.4.patch"
+      },
       "zendframework/zend-mail:2.7.3": {
         "Fix idn_to_ascii deprecation warning": "zendframework/zend-mail/fix-idn_to_ascii-deprecation-warning.patch"
       },
