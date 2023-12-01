@@ -72,7 +72,8 @@
         "Add support for PHP 7.4 to Gettext Loader": "zendframework/zend-i18n/gettext-loader-php7.4.patch"
       },
       "zendframework/zend-mail:2.7.3": {
-        "Fix idn_to_ascii deprecation warning": "zendframework/zend-mail/fix-idn_to_ascii-deprecation-warning.patch"
+        "Fix idn_to_ascii deprecation warning": "zendframework/zend-mail/fix-idn_to_ascii-deprecation-warning.patch",
+        "Allow any TLS version": "zendframework/zend-mail/allow_any_TLS_version.patch"
       },
       "zendframework/zend-stdlib:2.7.7": {
         "Fix ArrayObject::unserialize()": "zendframework/zend-stdlib/ArrayObject-unserialize-continue.patch"
