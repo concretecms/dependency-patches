@@ -1,0 +1,102 @@
+From: Filippo Tessarotto <zoeslam@gmail.com>
+Date: Mon, 15 May 2017 12:05:03 +0200
+Subject: [PATCH] Protocol: allow any TLS version
+
+
+--- a/src/Protocol/Imap.php
++++ b/src/Protocol/Imap.php
+@@ -13,6 +13,8 @@
+ 
+ class Imap
+ {
++    use ProtocolTrait;
++
+     /**
+      * Default timeout in seconds for initiating session
+      */
+@@ -102,7 +104,7 @@ public function connect($host, $port = null, $ssl = false)
+ 
+         if ($isTls) {
+             $result = $this->requestAndResponse('STARTTLS');
+-            $result = $result && stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
++            $result = $result && stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod());
+             if (! $result) {
+                 throw new Exception\RuntimeException('cannot enable TLS');
+             }
+
+--- a/src/Protocol/Pop3.php
++++ b/src/Protocol/Pop3.php
+@@ -13,6 +13,8 @@
+ 
+ class Pop3
+ {
++    use ProtocolTrait;
++
+     /**
+      * Default timeout in seconds for initiating session
+      */
+@@ -113,7 +115,7 @@ public function connect($host, $port = null, $ssl = false)
+ 
+         if ($isTls) {
+             $this->request('STLS');
+-            $result = stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
++            $result = stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod());
+             if (! $result) {
+                 throw new Exception\RuntimeException('cannot enable TLS');
+             }
+
+--- /dev/null
++++ b/src/Protocol/ProtocolTrait.php
+@@ -0,0 +1,31 @@
++<?php
++/**
++ * Zend Framework (http://framework.zend.com/)
++ *
++ * @link      http://github.com/zendframework/zf2 for the canonical source repository
++ * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
++ * @license   http://framework.zend.com/license/new-bsd New BSD License
++ */
++
++namespace Zend\Mail\Protocol;
++
++/**
++ * https://bugs.php.net/bug.php?id=69195
++ */
++trait ProtocolTrait
++{
++    public function getCryptoMethod()
++    {
++        // Allow the best TLS version(s) we can
++        $cryptoMethod = STREAM_CRYPTO_METHOD_TLS_CLIENT;
++
++        // PHP 5.6.7 dropped inclusion of TLS 1.1 and 1.2 in STREAM_CRYPTO_METHOD_TLS_CLIENT
++        // so add them back in manually if we can
++        if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
++            $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
++            $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT;
++        }
++
++        return $cryptoMethod;
++    }
++}
+
+--- a/src/Protocol/Smtp.php
++++ b/src/Protocol/Smtp.php
+@@ -17,6 +17,8 @@
+  */
+ class Smtp extends AbstractProtocol
+ {
++    use ProtocolTrait;
++
+     /**
+      * The transport method for the socket
+      *
+@@ -176,7 +178,7 @@ public function helo($host = '127.0.0.1')
+         if ($this->secure == 'tls') {
+             $this->_send('STARTTLS');
+             $this->_expect(220, 180);
+-            if (! stream_socket_enable_crypto($this->socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
++            if (! stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod())) {
+                 throw new Exception\RuntimeException('Unable to connect via TLS');
+             }
+             $this->ehlo($host);
