@@ -1,0 +1,22 @@
+From: Remi Collet <remi@remirepo.net>
+Date: Thu, 10 Oct 2019 16:28:19 +0200
+Subject: [PATCH] Fix Invalid characters passed for attempted conversion (7.4)
+
+
+--- a/src/Extractors/PhpCode.php
++++ b/src/Extractors/PhpCode.php
+@@ -87,11 +87,11 @@ class PhpCode extends Extractor implements ExtractorInterface
+                 case '\\':
+                     return '\\';
+                 case 'x':
+-                    return chr(hexdec(substr($match[0], 1)));
++                    return chr(hexdec(substr($match[1], 1)));
+                 case 'u':
+-                    return self::unicodeChar(hexdec(substr($match[0], 1)));
++                    return self::unicodeChar(hexdec(substr($match[1], 1)));
+                 default:
+-                    return chr(octdec($match[0]));
++                    return chr(octdec($match[1]));
+             }
+         }, $value);
+     }

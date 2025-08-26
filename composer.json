@@ -31,7 +31,8 @@
         "Fix access array offset on value of type null": "egulias/email-validator/access-array-offset-on-null.patch"
       },
       "gettext/gettext:3.5.9": {
-        "Fix PHP 8 compatibility": "gettext/gettext/php8-compatibility.patch"
+        "Fix PHP 8 compatibility": "gettext/gettext/php8-compatibility.patch",
+        "Fix wrong conversion in PhpCode": "gettext/gettext/fix-wrong-conversion.patch"
       },
       "laminas/laminas-code:3.4.1": {
         "Add PHP 8.1 compatibility": "laminas/laminas-code/php8.1-compatibility.patch"
