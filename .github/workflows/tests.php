@@ -74,6 +74,11 @@ function createComposerJson(string $dir, string $packageName, string $packageVer
         ],
         'config' => [
             'allow-plugins' => true,
+            'audit' => [
+                // These test fixtures intentionally install vulnerable package
+                // versions so we can verify that the local patches still apply.
+                'block-insecure' => false,
+            ],
         ],
     ];
     file_put_contents($dir . '/composer.json', json_encode($composerConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
