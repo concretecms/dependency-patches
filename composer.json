@@ -12,6 +12,11 @@
       "homepage": "https://mlocati.github.io"
     }
   ],
+  "config": {
+    "audit": {
+      "block-insecure": false
+    }
+  },
   "require": {
     "mlocati/composer-patcher": "^1.0.0"
   },
