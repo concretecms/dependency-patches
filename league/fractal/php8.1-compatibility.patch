@@ -1,0 +1,14 @@
+From: Michele Locati <michele@locati.it>
+Date: Fri, 21 Aug 2026 09:25:25 +0200
+Subject: [PATCH] Fix PHP Deprecation in Scope::jsonSerialize()
+
+--- a/src/Scope.php
++++ b/src/Scope.php
+@@ -295,6 +295,7 @@ class Scope implements \JsonSerializable
+     /**
+      * @return array
+      */
++    #[\ReturnTypeWillChange]
+     public function jsonSerialize()
+     {
+         return $this->toArray();
