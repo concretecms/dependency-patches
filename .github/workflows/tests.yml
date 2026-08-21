@@ -22,7 +22,7 @@ jobs:
         os:
           - ubuntu-latest
         php-version:
-          - "8.2"
+          - "8.4"
     runs-on: ${{ matrix.os }}
     steps:
       -
@@ -34,7 +34,7 @@ jobs:
           coverage: none
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       -
         name: Test
         run: php ./.github/workflows/tests.php
