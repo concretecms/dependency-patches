@@ -1,8 +1,9 @@
 From: Michele Locati <michele@locati.it>
-Date: Mon, 7 Sep 2026 15:19:02 +0200
-Subject: [PATCH] Fix the return types of the setters of Url and UrlImmutable
+Date: Mon, 7 Sep 2026 15:39:45 +0200
+Subject: [PATCH] Fix the PHPDoc of the setters of Url and UrlImmutable
 
-They are documented as returning UrlInterface (self), but Url returns $this and UrlImmutable returns a clone of the same class: with the actual types the subclasses keep their type in method chains.
+- they accept null (to unset the component), but the parameters are not documented as nullable
+- they are documented as returning UrlInterface (self), but Url returns $this and UrlImmutable returns a clone of the same class: with the actual types the subclasses keep their type in method chains
 
 --- a/src/Url.php
 +++ b/src/Url.php
@@ -80,72 +81,96 @@ They are documented as returning UrlInterface (self), but Url returns $this and 
      {
 --- a/src/UrlInterface.php
 +++ b/src/UrlInterface.php
-@@ -76,7 +76,7 @@ interface UrlInterface
+@@ -74,9 +74,9 @@ interface UrlInterface
+     /**
+      * Set the URL scheme component
       *
-      * @param string $data
+-     * @param string $data
++     * @param string|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setScheme($data);
  
-@@ -92,7 +92,7 @@ interface UrlInterface
+@@ -90,9 +90,9 @@ interface UrlInterface
+     /**
+      * Set the URL user component
       *
-      * @param string $data
+-     * @param string $data
++     * @param string|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setUser($data);
  
-@@ -108,7 +108,7 @@ interface UrlInterface
+@@ -106,9 +106,9 @@ interface UrlInterface
+     /**
+      * Set the URL pass component
       *
-      * @param string $data
+-     * @param string $data
++     * @param string|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setPass($data);
  
-@@ -124,7 +124,7 @@ interface UrlInterface
+@@ -122,9 +122,9 @@ interface UrlInterface
+     /**
+      * Set the URL host component
       *
-      * @param string|array|\Traversable $data
+-     * @param string|array|\Traversable $data
++     * @param string|array|\Traversable|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setHost($data);
  
-@@ -140,7 +140,7 @@ interface UrlInterface
+@@ -138,9 +138,9 @@ interface UrlInterface
+     /**
+      * Set the URL port component
       *
-      * @param string|integer $data
+-     * @param string|integer $data
++     * @param string|integer|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setPort($data);
  
-@@ -156,7 +156,7 @@ interface UrlInterface
+@@ -154,9 +154,9 @@ interface UrlInterface
+     /**
+      * Set the URL path component
       *
-      * @param string|array|\Traversable $data
+-     * @param string|array|\Traversable $data
++     * @param string|array|\Traversable|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setPath($data);
  
-@@ -172,7 +172,7 @@ interface UrlInterface
+@@ -170,9 +170,9 @@ interface UrlInterface
+     /**
+      * Set the URL query component
       *
-      * @param string|array|\Traversable $data
+-     * @param string|array|\Traversable $data
++     * @param string|array|\Traversable|null $data
       *
 -     * @return self
 +     * @return static
       */
      public function setQuery($data);
  
-@@ -188,7 +188,7 @@ interface UrlInterface
+@@ -186,9 +186,9 @@ interface UrlInterface
+     /**
+      * Set the URL fragment component
       *
-      * @param string $data
+-     * @param string $data
++     * @param string|null $data
       *
 -     * @return self
 +     * @return static
