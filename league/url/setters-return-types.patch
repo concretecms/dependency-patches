@@ -1,0 +1,154 @@
+From: Michele Locati <michele@locati.it>
+Date: Mon, 7 Sep 2026 15:19:02 +0200
+Subject: [PATCH] Fix the return types of the setters of Url and UrlImmutable
+
+They are documented as returning UrlInterface (self), but Url returns $this and UrlImmutable returns a clone of the same class: with the actual types the subclasses keep their type in method chains.
+
+--- a/src/Url.php
++++ b/src/Url.php
+@@ -53,6 +53,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setScheme($data)
+     {
+@@ -71,6 +73,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setUser($data)
+     {
+@@ -89,6 +93,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setPass($data)
+     {
+@@ -107,6 +113,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setHost($data)
+     {
+@@ -125,6 +133,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setPort($data)
+     {
+@@ -143,6 +153,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setPath($data)
+     {
+@@ -161,6 +173,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setQuery($data)
+     {
+@@ -179,6 +193,8 @@ class Url extends AbstractUrl
+ 
+     /**
+      * {@inheritdoc}
++     *
++     * @return $this
+      */
+     public function setFragment($data)
+     {
+--- a/src/UrlInterface.php
++++ b/src/UrlInterface.php
+@@ -76,7 +76,7 @@ interface UrlInterface
+      *
+      * @param string $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setScheme($data);
+ 
+@@ -92,7 +92,7 @@ interface UrlInterface
+      *
+      * @param string $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setUser($data);
+ 
+@@ -108,7 +108,7 @@ interface UrlInterface
+      *
+      * @param string $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setPass($data);
+ 
+@@ -124,7 +124,7 @@ interface UrlInterface
+      *
+      * @param string|array|\Traversable $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setHost($data);
+ 
+@@ -140,7 +140,7 @@ interface UrlInterface
+      *
+      * @param string|integer $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setPort($data);
+ 
+@@ -156,7 +156,7 @@ interface UrlInterface
+      *
+      * @param string|array|\Traversable $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setPath($data);
+ 
+@@ -172,7 +172,7 @@ interface UrlInterface
+      *
+      * @param string|array|\Traversable $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setQuery($data);
+ 
+@@ -188,7 +188,7 @@ interface UrlInterface
+      *
+      * @param string $data
+      *
+-     * @return self
++     * @return static
+      */
+     public function setFragment($data);
+ 

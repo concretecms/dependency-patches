@@ -47,7 +47,8 @@
         "Add PHP 8.1 compatibility": "league/fractal/php8.1-compatibility.patch"
       },
       "league/url:3.3.5": {
-        "Add PHP 8.1 compatibility": "league/url/php8.1-compatibility.patch"
+        "Add PHP 8.1 compatibility": "league/url/php8.1-compatibility.patch",
+        "Fix the return types of the setters of Url and UrlImmutable": "league/url/setters-return-types.patch"
       },
       "phpunit/phpunit:4.8.36": {
         "Avoid each() in Getopt": "phpunit/phpunit/Getopt-each.patch"
