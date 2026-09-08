@@ -1,0 +1,27 @@
+From: Michele Locati <michele@locati.it>
+Date: Tue, 8 Sep 2026 12:03:42 +0200
+Subject: [PATCH] Fix the return types of HtmlDomParser::file_get_html() and
+ str_get_html()
+
+They return false when the underlying functions fail (for example when the HTML is empty or too big), but they were documented as always returning a simple_html_dom instance.
+
+--- a/Src/Sunra/PhpSimple/HtmlDomParser.php
++++ b/Src/Sunra/PhpSimple/HtmlDomParser.php
+@@ -7,7 +7,7 @@ require 'simplehtmldom_1_5'.DIRECTORY_SEPARATOR.'simple_html_dom.php';
+ class HtmlDomParser {
+ 	
+ 	/**
+-	 * @return \simplehtmldom_1_5\simple_html_dom
++	 * @return \simplehtmldom_1_5\simple_html_dom|false false if the file can't be read, or if it's empty or too big
+ 	 */
+ 	static public function file_get_html() {
+ 		return call_user_func_array ( '\simplehtmldom_1_5\file_get_html' , func_get_args() );
+@@ -15,7 +15,7 @@ class HtmlDomParser {
+ 
+ 	/**
+ 	 * get html dom from string
+-	 * @return \simplehtmldom_1_5\simple_html_dom
++	 * @return \simplehtmldom_1_5\simple_html_dom|false false if the string is empty or too big
+ 	 */
+ 	static public function str_get_html() {
+ 		return call_user_func_array ( '\simplehtmldom_1_5\str_get_html' , func_get_args() );
