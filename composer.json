@@ -58,7 +58,8 @@
       },
       "sunra/php-simple-html-dom-parser:1.5.2": {
         "Fix minus in regular expressions": "sunra/php-simple-html-dom-parser/minus-in-regular-expressions.patch",
-        "Add PHP 8.1 compatibility": "sunra/php-simple-html-dom-parser/php8.1-compatibility.patch"
+        "Add PHP 8.1 compatibility": "sunra/php-simple-html-dom-parser/php8.1-compatibility.patch",
+        "Fix the return types of HtmlDomParser::file_get_html() and str_get_html()": "sunra/php-simple-html-dom-parser/return-types.patch"
       },
       "tedivm/jshrink:1.1.0": {
         "Fix continue switch in Minifier": "tedivm/jshrink/fix-minifier-loop.patch",
