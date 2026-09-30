@@ -12,31 +12,17 @@ This `dependency-patches` project contains those required patches, so that concr
 
 The official releases of concrete5 and Concrete CMS that can be downloaded from https://www.concretecms.org/download already contain the patches included in `dependency-patches`.
 
-If you use a composer-based concrete5/Concrete CMS installation you need to add these lines to your `composer.json` file:
-
-- in the `require` section (it it's not already included in the `composer.json` file that comes with concrete5/Concrete CMS):
-  ```json
-  "concretecms/dependency-patches": "^1",
-  ```
-- in the `extra` section:
-  ```json
-  "allow-subpatches": [
-      "concretecms/dependency-patches"
-  ],
-  ```
-
-
-## Security advisories
-
-Some of the patches fix security vulnerabilities in packages that are no longer updated for the PHP versions we support.
-
-Composer knows nothing about patches: it still considers the patched versions as vulnerable, so `composer audit` reports them and `composer update` may refuse to install them.
-
-You can tell Composer to ignore the advisories fixed by `dependency-patches` by adding them to the `composer.json` file of your project (it doesn't work in the `composer.json` files of dependencies):
+If you use a composer-based concrete5/Concrete CMS installation, the `composer.json` file of your project needs these settings:
 
 ```json
 {
+  "require": {
+    "concretecms/dependency-patches": "^1"
+  },
   "config": {
+    "allow-plugins": {
+      "mlocati/composer-patcher": true
+    },
     "audit": {
       "ignore": {
         "PKSA-w9tt-7782-78jx": "league/flysystem CVE-2026-102601: fixed by concretecms/dependency-patches",
@@ -48,44 +34,32 @@ You can tell Composer to ignore the advisories fixed by `dependency-patches` by 
         "PKSA-wwb1-81rc-pd65": "twig/twig CVE-2026-47730: fixed by concretecms/dependency-patches"
       }
     }
+  },
+  "extra": {
+    "allow-subpatches": [
+      "concretecms/dependency-patches"
+    ]
   }
 }
 ```
 
+- `require`: needed only for concrete5 before 8.5.13 and for Concrete CMS 9.0.x (later versions already require `dependency-patches`)
+- `allow-plugins`: lets Composer run the plugin that applies the patches
+- `allow-subpatches`: lets that plugin apply the patches defined by `dependency-patches`
+- `audit`: see [Security advisories](#security-advisories)
+
+
+## Security advisories
+
+Some of the patches fix security vulnerabilities in packages that are no longer updated for the PHP versions we support.
+
+Composer knows nothing about patches: it still considers the patched versions as vulnerable, so `composer audit` reports them and `composer update` may refuse to install them.
+
+The `audit`.`ignore` setting listed above tells Composer to ignore the advisories fixed by `dependency-patches`: it must be in the `composer.json` file of your project (it doesn't work in the `composer.json` files of dependencies).
+
 The patches are applied only to `league/flysystem` 1.1.10 and `twig/twig` 3.11.3: don't ignore these advisories if you install other versions of those packages.
+
 
 ## How to add a new patch
 
-If you want to patch a composer package named `<vendor>/<package>` at version `1.2.3`, you should:
-
-1. create the `.patch` file:
-    1. in the Concrete root directory, run `composer reinstall <vendor>/<package> --prefer-source` (requires composer 2.1+) to have a git repository
-    2. run `git checkout -b my-patch <tag>` inside the package directory (where `<tag>` is the tag corresponsing to the installed package version)
-    3. edit the required files
-    4. create a commit with the changes, by running `git commit -am "My wonderful patch"`
-    5. create a patch file by running `git format-patch --no-stat -1`
-    6. edit that patch by removing useless lines, like:
-        - the initial `From <sha1> <date>`
-        - the git-specific lines (they start with `diff --git ...` and `index sha1..sha1`
-        - the closing comments, if any (the `--` line at the end of the file and any other lines after it)
-    7. move the .patch file to the `<vendor>/<package>` directory in the dependency-patches repository
-2. add a `<vendor>/<package>:1.2.3` key to the `extra`.`patches` section of the `composer.json` file of this project.
-   For example:
-   ```json
-   "<vendor>/<package>:1.2.7": {
-       "Description of the patch": "<vendor>/<package>/name-of-the-patch-file.patch"
-   },
-   ```
-3. to test the patch locally, you can edit the `composer.json` file of your concrete5/Concrete CMS installation, adding:
-   - In the `require` section:
-     ```json
-     "concretecms/dependency-patches": "dev-master"
-     ```
-   - In the `repositories` section:
-     ```json
-     {
-         "type": "path",
-         "url": "relative/or/absolute/path/to/your-local/dependency-patches"
-     }
-     ```
-     PS: on Windows, you can use forward slashes (`/`) instead of back-slashes (`\`) as the directory separator.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
