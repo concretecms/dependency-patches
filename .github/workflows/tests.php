@@ -111,6 +111,8 @@ function applyPatch(string $dir, string $patchFile)
     }
     $cmd = implode(' ', [
         'patch',
+        // On Windows, don't strip the CR from the line endings (required to patch files with Windows line endings)
+        DIRECTORY_SEPARATOR === '\\' ? '--binary' : '',
         // Strip the smallest prefix containing 1 leading slash from each file name found in the patch file
         '-p1',
         // Back up mismatches only if otherwise requested
