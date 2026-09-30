@@ -26,6 +26,34 @@ If you use a composer-based concrete5/Concrete CMS installation you need to add 
   ```
 
 
+## Security advisories
+
+Some of the patches fix security vulnerabilities in packages that are no longer updated for the PHP versions we support.
+
+Composer knows nothing about patches: it still considers the patched versions as vulnerable, so `composer audit` reports them and `composer update` may refuse to install them.
+
+You can tell Composer to ignore the advisories fixed by `dependency-patches` by adding them to the `composer.json` file of your project (it doesn't work in the `composer.json` files of dependencies):
+
+```json
+{
+  "config": {
+    "audit": {
+      "ignore": {
+        "PKSA-w9tt-7782-78jx": "league/flysystem CVE-2026-102601: fixed by concretecms/dependency-patches",
+        "PKSA-kvv6-36cr-fkzb": "twig/twig CVE-2026-46627: fixed by concretecms/dependency-patches",
+        "PKSA-sjvz-tbbr-vwth": "twig/twig CVE-2026-46628: fixed by concretecms/dependency-patches",
+        "PKSA-h8hf-ytnd-5t9q": "twig/twig CVE-2026-46633: fixed by concretecms/dependency-patches",
+        "PKSA-21g2-dzjv-sky5": "twig/twig CVE-2026-46634: fixed by concretecms/dependency-patches",
+        "PKSA-3mcc-k66d-pydb": "twig/twig CVE-2026-46638: fixed by concretecms/dependency-patches",
+        "PKSA-wwb1-81rc-pd65": "twig/twig CVE-2026-47730: fixed by concretecms/dependency-patches"
+      }
+    }
+  }
+}
+```
+
+The patches are applied only to `league/flysystem` 1.1.10 and `twig/twig` 3.11.3: don't ignore these advisories if you install other versions of those packages.
+
 ## How to add a new patch
 
 If you want to patch a composer package named `<vendor>/<package>` at version `1.2.3`, you should:
