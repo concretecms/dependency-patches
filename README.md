@@ -1,9 +1,11 @@
-[![Tests](https://github.com/mlocati/concretecms-dependency-patches/actions/workflows/tests.yml/badge.svg)](https://github.com/mlocati/concretecms-dependency-patches/actions/workflows/tests.yml)
+[![Tests](https://github.com/concretecms/dependency-patches/actions/workflows/tests.yml/badge.svg)](https://github.com/concretecms/dependency-patches/actions/workflows/tests.yml)
 # Dependency patches for concrete5 and Concrete CMS
 
 concrete5 v8 and Concrete CMS v9+ use a lot of third party libraries, installed via Composer.
 
 Internal changes in newer PHP versions require to upgrade some of those composer packages, but some of them are no more compatible with the PHP versions we support, or they haven't been fixed yet.
+
+Some of those packages also have security vulnerabilities that are fixed only in versions we can't use.
 
 This `dependency-patches` project contains those required patches, so that concrete5 and Concrete CMS can still use them.
 
@@ -48,6 +50,8 @@ If you use a composer-based concrete5/Concrete CMS installation, the `composer.j
 - `allow-subpatches`: lets that plugin apply the patches defined by `dependency-patches`
 - `audit`: see [Security advisories](#security-advisories)
 
+New patches are included only in new versions of `dependency-patches`: keep it up to date (`composer update concretecms/dependency-patches`).
+
 
 ## Security advisories
 
@@ -58,6 +62,8 @@ Composer knows nothing about patches: it still considers the patched versions as
 The `audit`.`ignore` setting listed above tells Composer to ignore the advisories fixed by `dependency-patches`: it must be in the `composer.json` file of your project (it doesn't work in the `composer.json` files of dependencies).
 
 The patches are applied only to `league/flysystem` 1.1.10 and `twig/twig` 3.11.3: don't ignore these advisories if you install other versions of those packages.
+
+Please remark that `twig/twig` 3.11.3 (the last version that supports PHP versions older than 8.1) is affected by other advisories that are not fixed by `dependency-patches`: Composer keeps reporting them.
 
 
 ## How to add a new patch
