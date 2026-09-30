@@ -43,6 +43,9 @@
       "lcobucci/jwt:3.4.6": {
         "Add PHP 8 compatibility": "lcobucci/jwt/php8-compatibility.patch"
       },
+      "league/flysystem:1.1.10": {
+        "Report malformed UTF-8 as a corrupted path (CVE-2026-102601)": "league/flysystem/cve-2026-102601-malformed-utf8-path.patch"
+      },
       "league/fractal:0.19.2": {
         "Add PHP 8.1 compatibility": "league/fractal/php8.1-compatibility.patch"
       },
