@@ -1,0 +1,97 @@
+From: Dave Rogers <1657128+skybluesofa@users.noreply.github.com>
+Date: Mon, 16 Nov 2026 21:32:13 -0600
+Subject: [PATCH] Declare create_sid() on session handlers for PHP 8.6
+
+Backport of https://github.com/symfony/symfony/commit/3d3f2203b3fc77a6975dba7f5f8a8a39455020f0
+without the throw expression, which requires PHP 8.0.
+
+Co-authored-by: Nicolas Grekas <nicolas.grekas@gmail.com>
+
+--- a/Session/Storage/Handler/AbstractSessionHandler.php
++++ b/Session/Storage/Handler/AbstractSessionHandler.php
+@@ -52,6 +52,19 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
+         return true;
+     }
+ 
++    /**
++     * @return string
++     */
++    public function create_sid()
++    {
++        $sessionId = session_create_id();
++        if (false === $sessionId) {
++            throw new \RuntimeException('Unable to create a session ID.');
++        }
++
++        return $sessionId;
++    }
++
+     /**
+      * @return string
+      */
+--- a/Session/Storage/Handler/MarshallingSessionHandler.php
++++ b/Session/Storage/Handler/MarshallingSessionHandler.php
+@@ -55,6 +55,19 @@ class MarshallingSessionHandler implements \SessionHandlerInterface, \SessionUpd
+         return $this->handler->close();
+     }
+ 
++    /**
++     * @return string
++     */
++    public function create_sid()
++    {
++        $sessionId = session_create_id();
++        if (false === $sessionId) {
++            throw new \RuntimeException('Unable to create a session ID.');
++        }
++
++        return $sessionId;
++    }
++
+     /**
+      * @return bool
+      */
+--- a/Session/Storage/Handler/MigratingSessionHandler.php
++++ b/Session/Storage/Handler/MigratingSessionHandler.php
+@@ -45,6 +45,19 @@ class MigratingSessionHandler implements \SessionHandlerInterface, \SessionUpdat
+         $this->writeOnlyHandler = $writeOnlyHandler;
+     }
+ 
++    /**
++     * @return string
++     */
++    public function create_sid()
++    {
++        $sessionId = session_create_id();
++        if (false === $sessionId) {
++            throw new \RuntimeException('Unable to create a session ID.');
++        }
++
++        return $sessionId;
++    }
++
+     public function __serialize(): array
+     {
+         throw new \BadMethodCallException('Cannot serialize '.__CLASS__);
+--- a/Session/Storage/Proxy/SessionHandlerProxy.php
++++ b/Session/Storage/Proxy/SessionHandlerProxy.php
+@@ -91,6 +91,19 @@ class SessionHandlerProxy extends AbstractProxy implements \SessionHandlerInterf
+         return $this->handler->gc($maxlifetime);
+     }
+ 
++    /**
++     * @return string
++     */
++    public function create_sid()
++    {
++        $sessionId = session_create_id();
++        if (false === $sessionId) {
++            throw new \RuntimeException('Unable to create a session ID.');
++        }
++
++        return $sessionId;
++    }
++
+     /**
+      * @return bool
+      */

@@ -64,6 +64,9 @@
         "Add PHP 8.1 compatibility": "sunra/php-simple-html-dom-parser/php8.1-compatibility.patch",
         "Fix the return types of HtmlDomParser::file_get_html() and str_get_html()": "sunra/php-simple-html-dom-parser/return-types.patch"
       },
+      "symfony/http-foundation:5.4.56": {
+        "Add PHP 8.6 compatibility": "symfony/http-foundation/php8.6-compatibility.patch"
+      },
       "tedivm/jshrink:1.1.0": {
         "Fix continue switch in Minifier": "tedivm/jshrink/fix-minifier-loop.patch",
         "Update to upstream version 1.3.2": "tedivm/jshrink/update-upstream-1.3.2.patch"
