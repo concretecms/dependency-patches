@@ -77,7 +77,8 @@
         "Pre-escape HTML input on the spaceless filter (CVE-2026-46628)": "twig/twig/cve-2026-46628-spaceless-pre-escape.patch",
         "Fix code injection via use template names (CVE-2026-46633)": "twig/twig/cve-2026-46633-use-template-name-code-injection.patch",
         "Escape profiler HTML output names (CVE-2026-47730)": "twig/twig/cve-2026-47730-profiler-html-escaping.patch",
-        "Fix sandbox includes with preloaded templates (CVE-2026-46638)": "twig/twig/cve-2026-46638-sandbox-include-preloaded-template.patch"
+        "Fix sandbox includes with preloaded templates (CVE-2026-46638)": "twig/twig/cve-2026-46638-sandbox-include-preloaded-template.patch",
+        "Escape variables named like a macro import alias of another scope (CVE-2026-133771)": "twig/twig/cve-2026-133771-import-alias-autoescape.patch"
       },
       "wikimedia/less.php:1.8.2": {
           "Add PHP 8.2 compatibility": "wikimedia/less.php/fix-php-8.2-compatibility.patch"
